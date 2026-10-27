@@ -1,0 +1,41 @@
+﻿
+RelativePath                         
+------------                         
+.pytest_cache\v\cache\nodeids        
+.pytest_cache\.gitignore             
+.pytest_cache\CACHEDIR.TAG           
+.pytest_cache\README.md              
+config\config.py                     
+features\login_workflows.feature     
+Pages\signup_login_page.py           
+step_defs\conftest.py                
+step_defs\step_login_workflows.py    
+testcases\testcase_login_workflows.py
+project_structure.txt                
+pytest.ini           
+
+
+
+  Scenario Outline: Login to the account with incorrect user credentials
+    Given I navigate to Signup_Login Page
+    When I verify "Login to your account" is visible
+    Then I enter email "<email>" and password "<password>" and click on Login button
+    And I verify error "Your email or password is incorrect!" is visible
+
+    Examples:
+      | email                | password        |
+      | invalid_user@abc.com | wrongpassword12 |
+
+  Scenario Outline: Login to the account with valid user credentials and logout account
+    Given I navigate to Signup_Login Page
+    When I verify "Login to your account" is visible
+    Then I enter email "<email>" and password "<password>" and click on Login button
+    Then I verify that "Logged in as <username>" is visible
+    And I click on logout button 
+    And I verify "Login to your account" is visible
+
+    Examples:
+      | email                      | password         | username  |
+      | test1234test1234@gmail.com | YourPassword123! | Test User |
+
+
